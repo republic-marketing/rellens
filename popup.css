@@ -1,0 +1,94 @@
+/* Fonts: Geist (SIL Open Font Licence), registered under the two family names the styles use.
+   RelLens popup — Republic Marketing design language:
+   6px corners, number tiles, a Saans headline, the blue Let's Talk button shape, dark footer band.
+   Everything is regular weight, as on the site; "medium" is PP Neue Montreal Medium. */
+
+@font-face{font-family:"NM";src:url("fonts/geist-latin.woff2") format("woff2");font-weight:100 900;font-display:block}
+@font-face{font-family:"Saans";src:url("fonts/geist-latin.woff2") format("woff2");font-weight:100 900;font-display:block}
+
+:root{
+  --bg:#EFEEEC; --ink:#111212; --mut:#6F6F6F; --line:rgba(17,18,18,.1); --line2:rgba(17,18,18,.16);
+  --tile:#F2F2F0; --acc:#016DFF; --night:#0B0A1C; --ctl:#d6d4cf;
+  --follow:#12824f; --nofollow:#d93a32; --ugc:#b87400; --sponsored:#6D00F8; --internal:#016DFF;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{color-scheme:light}
+body{width:348px;background:#fff;color:var(--ink);font:400 13px/1.4 "NM",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+button,input,select{font:inherit;color:inherit}
+button{background:none;border:0;cursor:pointer;text-align:left}
+[hidden]{display:none!important}
+
+header{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid var(--line)}
+.logo{width:32px;height:32px;flex:none;display:block}
+.titles{flex:1;min-width:0}
+h1{font-size:15px;font-weight:500;line-height:1.2}
+#host{font-size:12px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+.say{padding:15px 16px 13px;background:var(--bg)}
+.say h2{font:400 26px/1.12 "Saans","NM",sans-serif;letter-spacing:-.035em}
+.say p{color:var(--mut);margin-top:5px;min-height:18px}
+.cta{display:flex;align-items:center;justify-content:space-between;width:100%;height:40px;margin-top:12px;padding:0 5px 0 14px;border-radius:6px;background:var(--acc);color:#fff;font-weight:500;font-size:14px}
+.cta i{display:grid;place-items:center;width:30px;height:30px;border-radius:4px;background:#fff}
+.cta svg{width:14px;height:14px;stroke:var(--acc);stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round;transition:transform .3s cubic-bezier(.16,1,.3,1)}
+.cta.back svg{transform:rotate(180deg)}
+.cta:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+
+.empty{padding:26px 22px 30px;color:var(--mut);text-align:center}
+.say .notice{margin-top:4px;min-height:0;font-size:12px;line-height:1.4;color:#8a5a00}
+
+/* link types, built like the site's Services menu rows */
+.types{list-style:none;padding:5px 8px}
+.types button{display:flex;align-items:center;gap:11px;width:100%;padding:5px 8px;border-radius:6px}
+.tile{display:grid;place-items:center;width:36px;height:36px;border-radius:6px;background:var(--tile);font:400 17px "Saans","NM",sans-serif;flex:none}
+.tile.sm{font-size:14px}
+.txt{flex:1;min-width:0}
+.txt b{display:block;font-weight:500;font-size:14px;line-height:1.45}
+.txt .d{display:block;font-size:12px;color:var(--mut);line-height:1.35;margin-top:1px}
+.hl{padding:1px 3px;border-radius:2px 2px 1px 1px;background:color-mix(in srgb,var(--c) 13%,transparent);box-shadow:0 2px 0 var(--c)}
+.box{display:grid;place-items:center;width:18px;height:18px;border-radius:4px;background:var(--ink);flex:none}
+.box svg{width:10px;height:10px;stroke:#fff;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.types button[aria-pressed=false] .box{background:none;box-shadow:inset 0 0 0 1.5px var(--line2)}
+.types button[aria-pressed=false] .box svg{display:none}
+.types button[aria-pressed=false] .tile{color:#b5b3ae}
+.types button[aria-pressed=false] .hl{background:none;box-shadow:0 2px 0 color-mix(in srgb,var(--c) 30%,transparent);color:var(--mut)}
+[data-t=follow]{--c:var(--follow)}[data-t=nofollow]{--c:var(--nofollow)}[data-t=ugc]{--c:var(--ugc)}[data-t=sponsored]{--c:var(--sponsored)}[data-t=internal]{--c:var(--internal)}
+
+.settings{padding:2px 16px;border-top:1px solid var(--line)}
+.row{display:flex;align-items:center;justify-content:space-between;min-height:36px;cursor:pointer}
+.row+.row{border-top:1px solid var(--line)}
+.seg{display:flex;padding:2px;border-radius:6px;background:var(--tile)}
+.seg button{padding:3px 11px;border-radius:4px;font-size:12px;color:var(--mut)}
+.seg button[aria-checked=true]{background:#fff;color:var(--ink);box-shadow:0 0 0 1px var(--line)}
+
+.switch{position:relative;display:inline-block;width:34px;height:20px;flex:none}
+.switch input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
+.track{position:absolute;inset:0;border-radius:6px;background:var(--ctl);transition:background .18s;pointer-events:none}
+.track::before{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:4px;background:#fff;transition:transform .18s cubic-bezier(.16,1,.3,1)}
+input:checked + .track{background:var(--acc)}
+input:checked + .track::before{transform:translateX(14px)}
+input:focus-visible + .track{outline:2px solid var(--ink);outline-offset:2px}
+
+/* links view */
+.search{display:flex;gap:8px;padding:12px 16px 10px}
+.search input,.search select{height:34px;border:0;box-shadow:inset 0 0 0 1px var(--line2);border-radius:6px;background:#fff;padding:0 11px;outline:none;font-size:12px}
+.search select{padding:0 6px 0 9px}
+.search input{flex:1;min-width:0}
+.search input:focus,.search select:focus{box-shadow:inset 0 0 0 1.5px var(--ink)}
+.list{list-style:none;max-height:300px;min-height:120px;overflow-y:auto;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.list li+li{border-top:1px solid var(--line)}
+.list button{display:grid;grid-template-columns:1fr auto;gap:1px 10px;width:100%;padding:9px 16px}
+.list .t{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:500}
+.list .h{grid-column:1;font-size:12px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.list .k{grid-row:1 / 3;grid-column:2;align-self:center;font-size:12px}
+.list .none{padding:30px 16px;color:var(--mut);text-align:center}
+.actions{display:flex;align-items:center;gap:8px;padding:10px 16px 12px}
+.actions span{flex:1;font-size:12px;color:var(--mut)}
+.btn{height:30px;padding:0 12px;border-radius:6px;box-shadow:inset 0 0 0 1px var(--line2);font-weight:500;text-align:center}
+
+footer{display:flex;align-items:center;justify-content:space-between;padding:11px 16px;background:var(--night);color:rgba(255,255,255,.7);font-size:12px}
+footer span{display:flex;align-items:center;gap:8px}
+footer img{height:12px;display:block;filter:brightness(0) invert(1)}
+footer button{color:rgba(255,255,255,.7)}
+
+body.off .say h2,body.off .say p,body.off .types{opacity:.5}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}

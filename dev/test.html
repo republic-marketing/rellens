@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RelLens test page</title>
+<style>
+  body{margin:0;font:17px/1.65 Georgia,serif;color:#1c1c1c;background:#fff}
+  .bar{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid #ddd;padding:14px 28px;display:flex;gap:22px;font:15px system-ui}
+  main{max-width:760px;margin:0 auto;padding:28px}
+  h2{font:600 20px system-ui;margin:38px 0 10px}
+  /* hostile page CSS the old version tripped on */
+  .hostile a{background:#fffbe6!important;text-decoration:none!important;border-radius:0!important;display:inline-flex;gap:6px;align-items:center}
+  .hostile a::after{content:"↗";font-size:12px}
+  .btn{display:inline-block;padding:13px 22px;background:#1c1c1c;color:#fff;border-radius:8px;text-decoration:none;font:600 15px system-ui}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .card{display:block;border:1px solid #ddd;border-radius:10px;overflow:hidden;text-decoration:none;color:inherit;font:14px system-ui}
+  .card div{padding:10px 12px}
+  .card img,.imglink img{display:block;width:100%}
+  .scroller{display:flex;gap:12px;overflow-x:auto;width:100%;padding-bottom:8px}
+  .scroller a{flex:0 0 220px;padding:26px 14px;background:#f2f2f2;border-radius:8px;font:15px system-ui;text-align:center}
+  .closed{height:0;overflow:hidden}
+  .dark{background:#14161a;color:#e9e9e9;padding:22px;border-radius:10px}
+  .dark a{color:#9ecbff}
+  .fade{opacity:0}
+  .narrow{width:230px;border:1px dashed #bbb;padding:8px}
+</style>
+</head>
+<body>
+<nav class="bar">
+  <a href="/">Home</a>
+  <a href="/about/">About</a>
+  <a href="https://sticky-follow.example.com/">Partner</a>
+  <a href="https://sticky-nofollow.example.com/" rel="nofollow">Login</a>
+</nav>
+<main>
+  <h2>Text links</h2>
+  <p>A plain <a href="https://follow.example.com/page">follow link</a>, a
+  <a href="https://nofollow.example.com/a?b=1" rel="nofollow noopener" target="_blank">nofollow link</a>, a
+  <a href="https://ugc.example.com/" rel="ugc nofollow">UGC link</a>, a
+  <a href="https://sponsored.example.com/" REL="NoFollow Sponsored">sponsored link</a>, an
+  <a href="/internal/page">internal link</a>, an <a href="/internal/nofollow" rel="nofollow">internal nofollow</a>
+  and an <a href="http://insecure.example.org/">insecure http link</a>. Not links: <a href="mailto:a@b.co">email</a>,
+  <a href="tel:123">phone</a>, <a href="#top">hash</a>, <a>no href</a>.</p>
+
+  <div class="narrow">Narrow column with <a href="https://wrap.example.com/" rel="nofollow">a long nofollow link that wraps over several lines of text</a> to test line boxes.</div>
+
+  <h2>Hostile page CSS</h2>
+  <p class="hostile">Flex links with forced styles: <a href="https://flex.example.com/">follow flex link</a> and <a href="https://flex2.example.com/" rel="sponsored">sponsored flex link</a>.</p>
+
+  <h2>Buttons, images and cards</h2>
+  <p><a class="btn" href="https://button.example.com/" rel="nofollow">Button link</a></p>
+  <p><a class="imglink" href="https://image.example.com/" rel="sponsored"><img alt="Sunset banner" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='700' height='150'%3E%3Crect width='700' height='150' fill='%23f3c9a5'/%3E%3C/svg%3E"></a></p>
+  <div class="cards">
+    <a class="card" href="https://card1.example.com/"><img alt="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='140'%3E%3Crect width='300' height='140' fill='%23cfe3f5'/%3E%3C/svg%3E"><div>Follow card</div></a>
+    <a class="card" href="https://card2.example.com/" rel="ugc"><img alt="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='140'%3E%3Crect width='300' height='140' fill='%23d9f0d2'/%3E%3C/svg%3E"><div>UGC card</div></a>
+    <a class="card" href="/internal/card"><img alt="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='140'%3E%3Crect width='300' height='140' fill='%23eee'/%3E%3C/svg%3E"><div>Internal card</div></a>
+  </div>
+
+  <h2>Scroller, closed panel, hidden things</h2>
+  <div class="scroller">
+    <a href="https://s1.example.com/">Slide one</a><a href="https://s2.example.com/" rel="nofollow">Slide two</a>
+    <a href="https://s3.example.com/">Slide three</a><a href="https://s4.example.com/" rel="sponsored">Slide four</a>
+    <a href="https://s5.example.com/">Slide five</a><a href="https://s6.example.com/" rel="ugc">Slide six</a>
+  </div>
+  <div class="closed"><a id="closed" href="https://closed.example.com/" rel="nofollow">Inside a closed accordion</a></div>
+  <div style="display:none"><a href="https://hidden.example.com/">display none</a></div>
+  <p class="fade"><a id="faded" href="https://faded.example.com/">opacity zero</a></p>
+
+  <h2>Shadow DOM and SVG</h2>
+  <div id="wc"></div>
+  <svg width="260" height="50" style="display:block;margin-top:10px"><a href="https://svg.example.com/" rel="nofollow"><rect width="260" height="50" rx="8" fill="#e8e8ff"/><text x="16" y="31" font-family="system-ui" font-size="15">SVG nofollow link</text></a></svg>
+
+  <h2>Dark section</h2>
+  <div class="dark">On dark backgrounds: <a href="https://dark1.example.com/">follow</a>, <a href="https://dark2.example.com/" rel="nofollow">nofollow</a>, <a href="https://dark3.example.com/" rel="ugc">UGC</a>, <a href="https://dark4.example.com/" rel="sponsored">sponsored</a>.</div>
+
+  <h2>Changes after load</h2>
+  <p id="late">Added later: </p>
+  <p>This one <a id="flip" href="https://flip.example.com/">starts as follow and becomes nofollow</a>.</p>
+
+  <div style="height:900px"></div>
+  <p>Bottom: <a href="https://bottom.example.com/" rel="nofollow">bottom nofollow link</a></p>
+</main>
+
+<script>
+  const wc = document.getElementById("wc").attachShadow({ mode: "open" });
+  wc.innerHTML = '<p style="font:15px system-ui">Web component: <a href="https://shadow.example.com/">shadow follow</a> and <a href="https://shadow2.example.com/" rel="sponsored">shadow sponsored</a></p>';
+  setTimeout(() => {
+    const a = document.createElement("a");
+    a.href = "https://late.example.com/"; a.rel = "ugc"; a.textContent = "late UGC link";
+    document.getElementById("late").appendChild(a);
+    document.getElementById("flip").setAttribute("rel", "nofollow");
+  }, 900);
+</script>
+
+<script src="shim.js"></script>
+<script src="../content.js"></script>
+<script>
+  // popup preview, docked top right (press P to hide)
+  if (!location.search.includes("nopopup")) fetch("../popup.html").then((r) => r.text()).then((html) => {
+    const f = document.createElement("iframe");
+    f.id = "popup-preview";
+    f.style.cssText = "position:fixed;right:16px;top:64px;width:348px;height:640px;border:1px solid #ccc;border-radius:10px;z-index:99999;background:#fff";
+    f.srcdoc = html.replace("<head>", '<head><base href="' + new URL("../", location.href) + '"><script>window.chrome=parent.__chromeStub<\/script>');
+    document.body.appendChild(f);
+  });
+</script>
+</body>
+</html>

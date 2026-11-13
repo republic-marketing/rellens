@@ -1,0 +1,4 @@
+Geist is licensed under the SIL Open Font License, Version 1.1.
+Copyright (c) 2023 Vercel, in collaboration with basement.studio.
+Licence text: https://openfontlicense.org/open-font-license-official-text/
+Source: https://github.com/vercel/geist-font

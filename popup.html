@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RelLens</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <header>
+    <svg class="logo" viewBox="0 0 64 64" aria-hidden="true">
+      <defs><linearGradient id="rl-g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#70C6FF" /><stop offset=".5" stop-color="#016DFF" /><stop offset="1" stop-color="#06228A" /></linearGradient></defs>
+      <rect width="64" height="64" rx="12" fill="url(#rl-g)" />
+      <path transform="translate(15.85 10.52) scale(2.4)" fill="#fff" fill-rule="evenodd" d="M12.524 12.561L12.961 17H9.511L9.074 13.021C9.01267 12.469 8.798 12.0243 8.43 11.687C8.07733 11.3343 7.63267 11.158 7.096 11.158H3.968V17H0.495V0.899999H7.28C8.96667 0.899999 10.293 1.36767 11.259 2.303C12.225 3.23833 12.708 4.45733 12.708 5.96C12.708 7.49333 12.0333 8.61267 10.684 9.318C11.7727 10.0693 12.386 11.1503 12.524 12.561ZM3.968 3.775V8.191H7.096C7.84733 8.191 8.41467 7.97633 8.798 7.547C9.18133 7.11767 9.373 6.58867 9.373 5.96C9.373 5.33133 9.18133 4.81 8.798 4.396C8.41467 3.982 7.84733 3.775 7.096 3.775H3.968Z" />
+    </svg>
+    <div class="titles">
+      <h1>RelLens</h1>
+      <p id="host">Reading the page</p>
+    </div>
+    <label class="switch" title="Show or hide the highlights on this page (Alt+Shift+L)">
+      <input type="checkbox" id="enabled" checked />
+      <span class="track"></span>
+    </label>
+  </header>
+
+  <section class="say" id="say">
+    <h2 id="headline">Reading the page</h2>
+    <p id="sub"></p>
+    <p class="notice" id="notice" hidden></p>
+    <button class="cta" id="cta">
+      <span id="cta-text">View all links</span>
+      <i><svg viewBox="0 0 14 14"><path d="M2.5 7h9M7.5 3l4 4-4 4" /></svg></i>
+    </button>
+  </section>
+
+  <main id="unsupported" hidden>
+    <p class="empty">RelLens can’t read this tab. Chrome blocks extensions on its own pages, the Web Store and PDFs. Try a normal web page.</p>
+  </main>
+
+  <main id="overview">
+    <ul class="types" id="types"></ul>
+
+    <section class="settings">
+      <div class="row">
+        <span>Highlight</span>
+        <div class="seg" id="style" role="radiogroup" aria-label="Highlight style">
+          <button role="radio" data-v="line">Line</button>
+          <button role="radio" data-v="box">Box</button>
+          <button role="radio" data-v="fill">Fill</button>
+        </div>
+      </div>
+      <label class="row">
+        <span>Details on hover</span>
+        <span class="switch"><input type="checkbox" id="tooltip" /><span class="track"></span></span>
+      </label>
+      <label class="row">
+        <span>Name tags on links</span>
+        <span class="switch"><input type="checkbox" id="tags" /><span class="track"></span></span>
+      </label>
+      <label class="row">
+        <span>Internal links too</span>
+        <span class="switch"><input type="checkbox" id="internal" /><span class="track"></span></span>
+      </label>
+    </section>
+  </main>
+
+  <main id="links" hidden>
+    <div class="search">
+      <input type="search" id="q" placeholder="Search text, domain or rel" autocomplete="off" />
+      <select id="filter" aria-label="Filter by type">
+        <option value="external">External</option>
+        <option value="follow">Follow</option>
+        <option value="nofollow">Nofollow</option>
+        <option value="ugc">UGC</option>
+        <option value="sponsored">Sponsored</option>
+        <option value="internal">Internal</option>
+        <option value="all">All links</option>
+      </select>
+    </div>
+    <ul class="list" id="list"></ul>
+    <div class="actions">
+      <span id="list-n"></span>
+      <button class="btn" id="copy">Copy</button>
+      <button class="btn" id="csv">Export CSV</button>
+    </div>
+  </main>
+
+  <footer>
+    <span>A tool by <img src="icons/republic-marketing.svg" alt="Republic Marketing" /></span>
+    <button id="rescan">Rescan</button>
+  </footer>
+
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+{
+  "manifest_version": 3,
+  "name": "RelLens: Nofollow & Dofollow Link Checker",
+  "version": "2.3.0",
+  "description": "Nofollow and dofollow link checker for SEO. One click highlights follow, nofollow, UGC and sponsored links on the page. Free.",
+  "homepage_url": "https://www.republicmarketing.co.uk/web-design-london",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "RelLens",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "commands": {
+    "toggle-highlights": {
+      "suggested_key": {
+        "default": "Alt+Shift+L"
+      },
+      "description": "Scan this page, or turn its highlights on or off"
+    }
+  }
+}
